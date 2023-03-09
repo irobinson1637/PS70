@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Bootstrap CSS and JavaScript files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Final Project Proposal</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container my-5">
+      <h1 class="text-center">Do Something with an arduino</h1>
+      <p>
+
+      <!-- <img src="boat1.jpeg" class="w-60 img-fluid" alt="Italian Trulli"> -->
+    </p>
+       
+        <p>
+            This week was about capacitive touch sensors.
+            Making a capacitive touch sensor using an Arduino and a piece of copper tape is a relatively simple process. First, connect the copper tape to an input pin on the Arduino board via a resistor. Then, connect a second wire from a different Arduino's pin to the copper tape. Next, program the Arduino to read the input from the copper tape and detect changes in capacitance when someone touches the tape. This can be done by using the CapacitiveSensor library, which comes pre-installed with the Arduino IDE. The library allows the Arduino to measure the capacitance of the copper tape and trigger an action when a touch is detected. This simple setup can be used for a variety of projects, such as creating touch-sensitive buttons or switches, or even a proximity sensor.
+            I decided to try the later. Namely, I wanted to make a crude distance measuring device. I did this by measuring out distance
+            on a piece of carbdoard with copper tape on the bottom. I used a series of 4 1M ohm resisotrs
+            since the higher the resistor the more senstivie the sensor is. I then plotted the values printed from the arduino
+            against the actual distance away my hand was as shown here.
+        </p>
+         <img src="distance_graph.png" class="w-60 img-fluid" alt="Italian Trulli">
+        <p>
+            As you can see, you wouldnt be able to directly interpolate this as disance. Namely, you'd need some functional
+            that looks exponential or logarithmic rather to turn measurements into distances. This is because the sensor meassurement
+            doesn't seem to increase linearly in the size of the distance between the sensor in my hand. Very cool!
+        </p>
+        <img src="week5_1.png" class="w-60 img-fluid" alt="Italian Trulli">
+        <img src="week5_2.png" class="w-60 img-fluid" alt="Italian Trulli">
+    <div>
+       <pre>
+        <code>
+            #include <CapacitiveSensor.h>
+                int N_samples = 100;
+                int ag = 0;
+                CapacitiveSensor   cs = CapacitiveSensor(4,8); // 1M resistor between pins 4 & 8, pin 8 is sensor pin, add a wire and or foil
+                
+                void setup()                    
+                {
+                   cs.set_CS_AutocaL_Millis(0xFFFFFFFF);// turn off autocalibrate on channel 1 - just as an example
+                   Serial.begin(9600);
+                   pinMode(7,OUTPUT);
+                }
+                
+                void loop()                    
+                {
+                  ag = 0;
+                  for(int i = 0; i<N_samples; i++){
+                    long sensor1 = cs.capacitiveSensor(10);
+                    ag += sensor1;
+                  }
+                  ag = ag/N_samples;
+                  Serial.println(ag);  // print sensor output 
+                }  
+        
+        </code>
+        </pre>
+    </div>
+        <p>I then did the same thing with a photoresistor, thinking that it would also give me a very rough approximation of distance as I bring my hand closer and block out 
+            more and more light. I was right! I then plotted the values printed from the arduino against the actual distance away my hand was as shown here.
+        </p>
+        <pre>
+        <code>
+         
+         //Constants
+         const int pResistor = A0; // Photoresistor at Arduino analog pin A0
+         
+         //Variables
+         int value;				
+         
+         void setup(){
+          pinMode(ledPin, OUTPUT); 
+         }
+         
+         void loop(){
+           value = analogRead(pResistor);
+           Serial.println(value);
+           delay(500); //Small delay
+         }</code>
+        </pre>
+        </body>
+      </html>
