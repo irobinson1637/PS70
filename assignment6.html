@@ -10,11 +10,80 @@
   <body>
 
     <div class="container my-5">
-      <h1 class="text-center">Input/Output</h1>
+      <h1 class="text-center">Output Devices - Servo Motors</h1>
       <p>
-
+        I chose a servo motor for this week's project which was to use an input and an output device that we havent used before. I have
+        been thinking about switching my final project to be a mechanical robot arm so I thought this might be a good opportunity to test building out 
+        a minirature one using servo motors. I chose servo motors because they have built in encoders so in theory I should be able to control the position precisely
+        with the right code. I also chose to use a potentiometer as the input device because I thought it would be a good way to control the servo motor. Namely,
+        I thought I could figure out a function to directly map the position of the potentiometer to the position of the servo motor. As such I could have a mini arm
+        that is used to control a larger arm.
       </p>
+
+      <video width="320" height="240" controls>
+        <source src="arm.mov" type="video/mp4">
+        <source src="arm.mp4" type="video/ogg">
+      Your browser does not support the video tag.
+      </video>
      </p>
+     <code>
+      #include
+        Servo myservo1;
+        Servo myservo2;
+        Servo myservo3;
+        Servo myservo4;
+
+        int pot1 = 0;
+        int pot2 = 1;
+        int pot3 = 2;
+        int pot4 = 3;
+        int val1;
+        int val2;
+        int val3;
+        int val4;
+
+        void setup()
+        {
+        myservo1.attach(4);
+        myservo2.attach(5);
+        myservo3.attach(6);
+        myservo4.attach(7);
+        Serial.begin(9600);
+        }
+        void loop() {
+        {
+        val1 = analogRead(pot1);
+        val1 = map(val1, 0, 512, 0, 180);
+        myservo1.write(val1);
+        Serial.println(val1);
+
+        val2 = analogRead(pot2);
+        val2 = map(val2, 0, 512, 0, 180);
+        myservo2.write(val2);
+
+        val3 = analogRead(pot3);
+        val3 = map(val3, 0, 512, 0, 180);
+        myservo3.write(val3);
+
+        val4 = analogRead(pot4);
+        val4 = map(val4, 0, 512, 0, 180);
+        myservo4.write(val4);
+        }
+        }
+
+
+     </code>
+
+     I then tried hooking up an osciliscope to the servo motor to see if I could get a better understanding of how it works. I was able to see that the servo motor seems to be driven off
+     of a sequence of square pulses that look like this:
+
+     <img
+      src="osc.png">
+
+    <img>
+
+    I guess this means that there is pulse width modulation to control the position that the servo is being sent to. It seems to have an approximately 1 ms pulse every 8 ms and the pulses seem to get longer as the motor rotates. I also noticed that the servo motor seems to be able to rotate 180 degrees.
+    I am still not entirely sure what this means but learning to at least hook up the scope was a valuable lesson.
     
       
         </body>
