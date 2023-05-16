@@ -19,6 +19,10 @@
         The design was heavily inspired by tutorials I found online. However, part of the issue is that the parts were all designed for metric units and ours were imperial
         and also a lot of the deisgn files were corrupted. As such I had to re-do a lot of the gears and other parts. I also had to make some modifications to the design and this was all a great exercise
         in trying to make an accurate replica of something in fusion and/or trying to take something that has already been turned into a mesh and extract a normal file out fo it.
+        <img src="Final/IMG_2468.jpeg" class="w-20 img-fluid">
+        <img src="Final/IMG_2469.jpeg" class="w-20 img-fluid">
+        <img src="Final/IMG_2470.jpeg" class="w-20 img-fluid">
+        <img src="Final/IMG_2471 3.jpeg" class="w-20 img-fluid">
 
         <h2>Printing</h2>
         The printing itself was brutal. Namely, the prints were long and prone to failure. This taught me a ton about printing. I had to learn how to adjust tolerances and also things like adjusting the speed and upping the temperature
@@ -31,11 +35,15 @@
 
         The final step was controlling all the motors which I used 4 a4988 drivers for. I had to learn how to use these and also how to use the arduino to control them. I also had to learn how to use the arduino to control the servos for the end effector
         that I added which was a simple gripper. Making sure all the wiring was connected and getting sufficent amps to drive 4 servos was a challenge but I found a big enough wall supply to cover it and was happy with the results!
+        <h2>Code</h2>
+        The code was pretty simple as I ended up running short on time so I used the accel stepper library to just set the arm to random positions
+        in order to demonstrate its range of motion. One big learning I had here was the need to set the acceleration of the motors pretty low
+        in order to avoid skipping steps. Namely, the first few iterations of the code where I used just the normal
+        stepper library, the belts would skip due to poor tolerances in my gears. However, once I switched to the accel stepper library
+        I was able to control the speed at which the motors reve up which gave the timing belts more time to grip. Again, this was a great lesson and 
+        something I never would have thought of before hand while thinking of the project and is a great lesson in what engineers have to actually deal with problem-solving wise.
+        
 
-        <img src="Final/IMG_2468.jpeg" class="w-20 img-fluid">
-        <img src="Final/IMG_2469.jpeg" class="w-20 img-fluid">
-        <img src="Final/IMG_2470.jpeg" class="w-20 img-fluid">
-        <img src="Final/IMG_2471 3.jpeg" class="w-20 img-fluid">
         <img src="Final/IMG_2496.jpeg" class="w-20 img-fluid">
         <img src="Final/IMG_2497.jpeg" class="w-20 img-fluid">
         <img src="Final/IMG_2498.jpeg" class="w-20 img-fluid">
