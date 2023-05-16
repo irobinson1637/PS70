@@ -20,12 +20,13 @@
         that is used to control a larger arm.
       </p>
 
-      <video width="320" height="240" controls>
+      <video width="640" height="480" controls>
         <source src="arm.mov" type="video/mp4">
         <source src="arm.mp4" type="video/ogg">
       Your browser does not support the video tag.
       </video>
      </p>
+     <pre>
      <code>
       #include
         Servo myservo1;
@@ -70,21 +71,16 @@
         myservo4.write(val4);
         }
         }
-
-
      </code>
+    </pre>
 
      I then tried hooking up an osciliscope to the servo motor to see if I could get a better understanding of how it works. I was able to see that the servo motor seems to be driven off
      of a sequence of square pulses that look like this:
 
-     <img
-      src="osc.png">
-
-    <img>
+     <img src="osc.png">
 
     I guess this means that there is pulse width modulation to control the position that the servo is being sent to. It seems to have an approximately 1 ms pulse every 8 ms and the pulses seem to get longer as the motor rotates. I also noticed that the servo motor seems to be able to rotate 180 degrees.
     I am still not entirely sure what this means but learning to at least hook up the scope was a valuable lesson.
-    
-      
+
         </body>
       </html>
